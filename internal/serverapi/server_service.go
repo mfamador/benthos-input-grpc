@@ -4,6 +4,7 @@ package serverapi
 import (
 	"context"
 	"fmt"
+
 	"github.com/mfamador/benthos-input-grpc/internal/datasource/benthos"
 
 	"github.com/Jeffail/benthos/v3/public/service"
