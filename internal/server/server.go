@@ -4,6 +4,7 @@ package server
 
 import (
 	"fmt"
+	"github.com/Jeffail/benthos/v3/public/service"
 	"github.com/mfamador/benthos-input-grpc/internal/serverapi"
 	"github.com/mfamador/benthos-input-grpc/pkg/serverv1"
 	"net"
@@ -24,10 +25,9 @@ func Start(grpcServer *grpc.Server, list net.Listener) error {
 }
 
 // GetGRPCServer returns the gRPC server
-func GetGRPCServer(conf Config) (*grpc.Server, net.Listener, error) {
+func GetGRPCServer(conf Config, messageChann chan *service.Message) (*grpc.Server, net.Listener, error) {
 	grpcServer := grpc.NewServer()
-	serverv1.RegisterServiceServer(grpcServer, serverapi.NewServerService())
-
+	serverv1.RegisterServiceServer(grpcServer, serverapi.NewServerService(messageChann))
 	listener, err := net.Listen("tcp", fmt.Sprintf(":%d", conf.GrpcPort))
 	if err != nil {
 		return nil, nil, fmt.Errorf("error creating listener: %v", err)
@@ -36,15 +36,13 @@ func GetGRPCServer(conf Config) (*grpc.Server, net.Listener, error) {
 }
 
 // RunApp runs the API
-func RunApp(sConf Config) error {
-	grpcServer, lis, err := GetGRPCServer(sConf)
+func RunApp(sConf Config, messageChann chan *service.Message) error {
+	grpcServer, lis, err := GetGRPCServer(sConf, messageChann)
 	if err != nil {
 		return fmt.Errorf("failed to build grpcServer: %v", err)
 	}
-
 	if e := Start(grpcServer, lis); e != nil {
 		log.Fatal().Msgf("Failed to start the gRPC server")
 	}
-
 	return nil
 }

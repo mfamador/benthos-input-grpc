@@ -1,0 +1,31 @@
+http:
+  address: ${HTTP_ADDRESS:0.0.0.0:4199}
+
+input:
+  broker:
+    inputs:
+    - label: input_grpc_server
+      type: grpc_server
+
+pipeline:
+  processors:
+  - log:
+      level: INFO
+      message: "message passing through benthos"
+      fields:
+        payload: '${! json() }'
+
+output:
+  stdout: {}
+
+metrics:
+  prometheus:
+    prefix: benthos
+
+logger:
+  prefix: benthos-grpc
+  level: ${LOGLEVEL:INFO}
+  add_timestamp: true
+  format: logfmt
+  static_fields:
+    '@service': benthos_grpc

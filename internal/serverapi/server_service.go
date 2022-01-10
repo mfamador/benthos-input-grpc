@@ -4,6 +4,7 @@ package serverapi
 import (
 	"context"
 	"fmt"
+	"github.com/Jeffail/benthos/v3/public/service"
 	"github.com/mfamador/benthos-input-grpc/internal/services"
 	"github.com/mfamador/benthos-input-grpc/pkg/serverv1"
 )
@@ -18,15 +19,14 @@ type serverService struct {
 }
 
 // NewServerService instantiates a new server service
-func NewServerService() ServerService {
-	ss := services.NewService()
-
+func NewServerService(messageChann chan *service.Message) ServerService {
+	ss := services.NewService(messageChann)
 	return &serverService{
 		serverService: ss,
 	}
 }
 
-// Post post a message
+// Post posts a message
 func (d *serverService) Post(_ context.Context, request *serverv1.PostRequest) (*serverv1.PostReply, error) {
 	if err := d.serverService.Post(request.Message); err != nil {
 		return nil, fmt.Errorf("error posting message: %v", err)

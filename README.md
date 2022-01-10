@@ -7,7 +7,7 @@
 ### Run server to read messages and deliver them to the benthos pipeline
 
 ```
-go run cmd/server/main.go
+go run cmd/server/main.go -c config/pipeline.yaml
 ```
 
 
