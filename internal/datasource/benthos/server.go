@@ -1,3 +1,4 @@
+// Package benthos contains the benthos repository implementation
 package benthos
 
 import (

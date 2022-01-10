@@ -22,14 +22,14 @@ func main() {
 	client := serverv1.NewServiceClient(conn)
 
 	for {
-		request := serverv1.PostRequest{Message: fmt.Sprintf(`{"value":%q}`, randSeq(10))}
+		const size = 10
+		request := serverv1.PostRequest{Message: fmt.Sprintf(`{"value":%q}`, randSeq(size))}
 		_, err := client.Post(context.Background(), &request)
 		if err != nil {
 			log.Error().Err(err)
 		}
 		time.Sleep(time.Second)
 	}
-
 }
 
 var letters = []rune("abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ")
