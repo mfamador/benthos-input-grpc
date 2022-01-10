@@ -3,8 +3,6 @@ package input
 
 import (
 	"context"
-	"encoding/json"
-	"github.com/Azure/azure-sdk-for-go/storage"
 	"github.com/Jeffail/benthos/v3/public/service"
 	"github.com/mfamador/benthos-input-grpc/internal/config"
 	"github.com/mfamador/benthos-input-grpc/internal/server"
@@ -47,15 +45,6 @@ type gRPCInput struct {
 
 func (rts *gRPCInput) Connect(ctx context.Context) error {
 	return nil
-}
-
-func (rts *gRPCInput) writeMessages(resp *storage.EntityQueryResult, msgType string) {
-	for _, entity := range resp.Entities {
-		record, _ := json.Marshal(entity.Properties)
-		msg := service.NewMessage(record)
-		msg.MetaSet("message_type", msgType)
-		rts.messageChan <- msg
-	}
 }
 
 func (rts *gRPCInput) Read(ctx context.Context) (*service.Message, service.AckFunc, error) {
