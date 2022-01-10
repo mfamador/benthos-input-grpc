@@ -13,12 +13,15 @@ import (
 )
 
 func main() {
-	log.Info().Timestamp().Msg("Test Client gRPC Server API")
-	conn, _ := grpc.Dial(fmt.Sprintf("localhost:%d", config.Config.Server.GrpcPort), grpc.WithInsecure())
+	log.Info().Timestamp().Msg("Client gRPC Server API")
+	conn, err := grpc.Dial(fmt.Sprintf("localhost:%d", config.Config.Server.GrpcPort), grpc.WithInsecure())
+	if err != nil {
+		log.Error().Err(err)
+	}
 	client := serverv1.NewServiceClient(conn)
 
-	for i := 0; i < 10; i++ {
-		request := serverv1.PostRequest{Message: fmt.Sprintf(`{"value":"%s"}`, randSeq(10))}
+	for {
+		request := serverv1.PostRequest{Message: fmt.Sprintf(`{"value":"%q"}`, randSeq(10))}
 		_, err := client.Post(context.Background(), &request)
 		if err != nil {
 			log.Error().Err(err)

@@ -11,7 +11,7 @@ go run cmd/server/main.go -c config/pipeline.yaml
 ```
 
 
-### Run the client to post message
+### Run the client to post random messages
 
 ```
 go run cmd/client/main.go
