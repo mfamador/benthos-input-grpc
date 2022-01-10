@@ -1,0 +1,9 @@
+logger:
+  # Log level. Can be one of: debug, info, warn, error, fatal, panic
+  level: info
+  # Use pretty (human-readable) logs
+  pretty: false
+
+# the server config
+server:
+  grpcPort: 8181

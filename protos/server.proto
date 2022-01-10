@@ -1,0 +1,14 @@
+﻿syntax = "proto3";
+package Server.v1;
+
+option go_package = "/serverv1;serverv1";
+
+service Service {
+  rpc Post (PostRequest) returns (PostReply);
+}
+
+message PostRequest {
+  string message = 1;
+}
+
+message PostReply {}
