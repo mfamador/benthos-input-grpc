@@ -4,12 +4,13 @@ package main
 import (
 	"context"
 	"fmt"
+	"math/rand"
+	"time"
+
 	"github.com/mfamador/benthos-input-grpc/internal/config"
 	"github.com/mfamador/benthos-input-grpc/pkg/serverv1"
 	"github.com/rs/zerolog/log"
 	"google.golang.org/grpc"
-	"math/rand"
-	"time"
 )
 
 func main() {

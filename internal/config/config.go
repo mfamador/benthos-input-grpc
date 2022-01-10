@@ -3,9 +3,10 @@ package config
 
 import (
 	"errors"
-	"github.com/mfamador/benthos-input-grpc/internal/server"
 	"os"
 	"path/filepath"
+
+	"github.com/mfamador/benthos-input-grpc/internal/server"
 
 	"github.com/jinzhu/configor"
 )

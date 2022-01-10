@@ -1,13 +1,13 @@
-// Package server contains the common HTTP server logic, e.g.:
-//  routes, validators, error handling
+// Package server contains the gRPC instantiation
 package server
 
 import (
 	"fmt"
+	"net"
+
 	"github.com/Jeffail/benthos/v3/public/service"
 	"github.com/mfamador/benthos-input-grpc/internal/serverapi"
 	"github.com/mfamador/benthos-input-grpc/pkg/serverv1"
-	"net"
 
 	"github.com/rs/zerolog/log"
 	"google.golang.org/grpc"

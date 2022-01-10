@@ -1,7 +1,8 @@
 // Package services contains the business logic for Posting messages
-package services //nolint
+package services
+
 import (
-	"github.com/Jeffail/benthos/v3/public/service"
+	"github.com/mfamador/benthos-input-grpc/internal/repository"
 	"github.com/rs/zerolog/log"
 )
 
@@ -11,19 +12,16 @@ type Server interface {
 }
 
 type server struct {
-	messageChan chan *service.Message
+	repo repository.Server
 }
 
-// NewService creates a Packets service
-func NewService(messageChan chan *service.Message) Server {
-	return &server{messageChan}
+// NewServer creates a Packets service
+func NewServer(repo repository.Server) Server {
+	return &server{repo}
 }
 
 // Post posts message to repository benthos
 func (s *server) Post(message string) error {
-	// SEND TO BENTHOS
 	log.Info().Msg(message)
-	msg := service.NewMessage([]byte(message))
-	s.messageChan <- msg
-	return nil
+	return s.repo.Post(message)
 }

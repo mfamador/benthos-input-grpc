@@ -4,6 +4,8 @@ package serverapi
 import (
 	"context"
 	"fmt"
+	"github.com/mfamador/benthos-input-grpc/internal/datasource/benthos"
+
 	"github.com/Jeffail/benthos/v3/public/service"
 	"github.com/mfamador/benthos-input-grpc/internal/services"
 	"github.com/mfamador/benthos-input-grpc/pkg/serverv1"
@@ -20,7 +22,7 @@ type serverService struct {
 
 // NewServerService instantiates a new server service
 func NewServerService(messageChann chan *service.Message) ServerService {
-	ss := services.NewService(messageChann)
+	ss := services.NewServer(benthos.NewServer(messageChann))
 	return &serverService{
 		serverService: ss,
 	}
