@@ -1,4 +1,4 @@
-# gRPC benthos input
+# gRPC custom benthos input
 
 
 ## Create a custom benthos input that receives messages from a gRPC server
