@@ -1,4 +1,4 @@
 #!/bin/bash
 
 cd protos
-protoc -I=. --go_out=plugins=grpc:../pkg poster.proto
+protoc -I=. --go-grpc_out=require_unimplemented_servers=false:../pkg --go_out=:../pkg poster.proto

@@ -19,6 +19,7 @@ type PosterService interface {
 
 type posterService struct {
 	serverService service.Poster
+	posterv1.UnimplementedPosterServer
 }
 
 // NewPosterService instantiates a new poster service
