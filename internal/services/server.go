@@ -3,7 +3,6 @@ package services
 
 import (
 	"github.com/mfamador/benthos-input-grpc/internal/repository"
-	"github.com/rs/zerolog/log"
 )
 
 // Server exposes the interface to do operations on the Packets entity
@@ -22,6 +21,5 @@ func NewServer(repo repository.Server) Server {
 
 // Post posts message to repository benthos
 func (s *server) Post(message string) error {
-	log.Info().Msg(message)
 	return s.repo.Post(message)
 }

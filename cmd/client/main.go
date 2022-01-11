@@ -23,7 +23,7 @@ func main() {
 
 	for {
 		const size = 10
-		request := serverv1.PostRequest{Message: fmt.Sprintf(`{"value":%q}`, randSeq(size))}
+		request := serverv1.PostRequest{Message: fmt.Sprintf(`{"foo":%q,"bar":%q}`, randSeq(size), randSeq(size))}
 		_, err := client.Post(context.Background(), &request)
 		if err != nil {
 			log.Error().Err(err)
