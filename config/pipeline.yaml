@@ -5,7 +5,8 @@ input:
   broker:
     inputs:
     - label: input_grpc_server
-      type: grpc_server
+      grpc_server:
+        max_in_flight: 50
 
 pipeline:
   processors:

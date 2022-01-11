@@ -10,13 +10,22 @@ import (
 	"github.com/rs/zerolog/log"
 )
 
+const (
+	field_max_in_flight   = "max_in_flight"
+	default_max_in_flight = 10
+)
+
 var gRPCInputConfigSpec = service.NewConfigSpec().
-	Summary("Creates an input that receives msgs from a gRPC server.")
+	Summary("Creates an input that receives msgs from a gRPC server.").
+	Field(service.NewIntField(field_max_in_flight).Default(default_max_in_flight))
 
 func newGRPCInput(conf *service.ParsedConfig) (service.Input, error) {
-	const maxchanns = 50
+	mf, err := conf.FieldInt(field_max_in_flight)
+	if err != nil {
+		log.Panic().Msgf("could not get max in flight value: %v", err)
+	}
 	input := gRPCInput{
-		messageChan: make(chan *service.Message, maxchanns),
+		messageChan: make(chan *service.Message, mf),
 	}
 	go func() {
 		if err := server.RunApp(config.Config.Server, input.messageChan); err != nil {
