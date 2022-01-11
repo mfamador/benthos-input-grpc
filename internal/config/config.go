@@ -49,7 +49,6 @@ func searchConfig(dir string) (string, error) {
 
 // NewConfig returns a new config
 func init() {
-	setEnvVars()
 	configDir := os.Getenv("CONFIGOR_DIR")
 
 	if configDir == "" {
@@ -66,15 +65,5 @@ func init() {
 	config := configor.New(&configor.Config{ENVPrefix: "-"})
 	if err := config.Load(&Config, configFiles...); err != nil {
 		panic("Invalid config")
-	}
-}
-
-func setEnvVars() {
-	if os.Getenv("DB_READINGSSTORAGECONNECTIONSTRING") == "" {
-		os.Setenv("DB_READINGSSTORAGECONNECTIONSTRING", os.Getenv("INTEGRATION_TEST_STORAGECONNECTIONSTRING"))     //nolint
-		os.Setenv("DB_PACKETSSTORAGECONNECTIONSTRING", os.Getenv("INTEGRATION_TEST_STORAGECONNECTIONSTRING"))      //nolint
-		os.Setenv("DB_EVENTSSTORAGECONNECTIONSTRING", os.Getenv("INTEGRATION_TEST_STORAGECONNECTIONSTRING"))       //nolint
-		os.Setenv("DB_CONSUMPTIONSSTORAGECONNECTIONSTRING", os.Getenv("INTEGRATION_TEST_STORAGECONNECTIONSTRING")) //nolint
-		os.Setenv("DB_REFILLSSTORAGECONNECTIONSTRING", os.Getenv("INTEGRATION_TEST_STORAGECONNECTIONSTRING"))      //nolint
 	}
 }

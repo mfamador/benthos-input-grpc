@@ -10,8 +10,8 @@ type server struct {
 	messageChan chan *service.Message
 }
 
-// NewServer handles post messages to benthos
-func NewServer(messageChan chan *service.Message) repository.Server {
+// NewPoster handles post messages to benthos
+func NewPoster(messageChan chan *service.Message) repository.Poster {
 	return &server{messageChan: messageChan}
 }
 

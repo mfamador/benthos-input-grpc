@@ -1,9 +1,9 @@
 ﻿syntax = "proto3";
-package Server.v1;
+package Poster.v1;
 
-option go_package = "/serverv1;serverv1";
+option go_package = "/posterv1;posterv1";
 
-service Service {
+service Poster {
   rpc Post (PostRequest) returns (PostReply);
 }
 

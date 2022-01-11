@@ -1,7 +1,7 @@
 // Package repository contains the repositories interfaces
 package repository
 
-// Server exposes the interface to post messages
-type Server interface {
+// Poster exposes the interface to post messages
+type Poster interface {
 	Post(string) error
 }

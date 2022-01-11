@@ -7,7 +7,7 @@ import (
 
 	"github.com/Jeffail/benthos/v3/public/service"
 	"github.com/mfamador/benthos-input-grpc/internal/serverapi"
-	"github.com/mfamador/benthos-input-grpc/pkg/serverv1"
+	"github.com/mfamador/benthos-input-grpc/pkg/posterv1"
 
 	"github.com/rs/zerolog/log"
 	"google.golang.org/grpc"
@@ -27,7 +27,7 @@ func Start(grpcServer *grpc.Server, list net.Listener) error {
 // GetGRPCServer returns the gRPC server
 func GetGRPCServer(conf Config, messageChann chan *service.Message) (*grpc.Server, net.Listener, error) {
 	grpcServer := grpc.NewServer()
-	serverv1.RegisterServiceServer(grpcServer, serverapi.NewServerService(messageChann))
+	posterv1.RegisterPosterServer(grpcServer, serverapi.NewPosterService(messageChann))
 	listener, err := net.Listen("tcp", fmt.Sprintf(":%d", conf.GrpcPort))
 	if err != nil {
 		return nil, nil, fmt.Errorf("error creating listener: %v", err)
