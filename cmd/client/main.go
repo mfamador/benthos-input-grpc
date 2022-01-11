@@ -14,7 +14,7 @@ import (
 )
 
 func main() {
-	log.Info().Timestamp().Msg("Client gRPC Server API")
+	log.Info().Timestamp().Msg("Client gRPC Poster API")
 	conn, err := grpc.Dial(fmt.Sprintf("localhost:%d", config.Config.Server.GrpcPort), grpc.WithInsecure())
 	if err != nil {
 		log.Error().Err(err)

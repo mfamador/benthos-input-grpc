@@ -8,7 +8,7 @@ import (
 )
 
 func main() {
-	log.Info().Timestamp().Msg("Test Server gRPC API")
+	log.Info().Timestamp().Msg("Poster gRPC API Server")
 
 	service.Run()
 }
