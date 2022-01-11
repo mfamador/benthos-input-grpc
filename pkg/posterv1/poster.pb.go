@@ -7,10 +7,6 @@
 package posterv1
 
 import (
-	context "context"
-	grpc "google.golang.org/grpc"
-	codes "google.golang.org/grpc/codes"
-	status "google.golang.org/grpc/status"
 	protoreflect "google.golang.org/protobuf/reflect/protoreflect"
 	protoimpl "google.golang.org/protobuf/runtime/protoimpl"
 	reflect "reflect"
@@ -201,84 +197,4 @@ func file_poster_proto_init() {
 	file_poster_proto_rawDesc = nil
 	file_poster_proto_goTypes = nil
 	file_poster_proto_depIdxs = nil
-}
-
-// Reference imports to suppress errors if they are not otherwise used.
-var _ context.Context
-var _ grpc.ClientConnInterface
-
-// This is a compile-time assertion to ensure that this generated file
-// is compatible with the grpc package it is being compiled against.
-const _ = grpc.SupportPackageIsVersion6
-
-// PosterClient is the client API for Poster service.
-//
-// For semantics around ctx use and closing/ending streaming RPCs, please refer to https://godoc.org/google.golang.org/grpc#ClientConn.NewStream.
-type PosterClient interface {
-	Post(ctx context.Context, in *PostRequest, opts ...grpc.CallOption) (*PostReply, error)
-}
-
-type posterClient struct {
-	cc grpc.ClientConnInterface
-}
-
-func NewPosterClient(cc grpc.ClientConnInterface) PosterClient {
-	return &posterClient{cc}
-}
-
-func (c *posterClient) Post(ctx context.Context, in *PostRequest, opts ...grpc.CallOption) (*PostReply, error) {
-	out := new(PostReply)
-	err := c.cc.Invoke(ctx, "/Poster.v1.Poster/Post", in, out, opts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-// PosterServer is the server API for Poster service.
-type PosterServer interface {
-	Post(context.Context, *PostRequest) (*PostReply, error)
-}
-
-// UnimplementedPosterServer can be embedded to have forward compatible implementations.
-type UnimplementedPosterServer struct {
-}
-
-func (*UnimplementedPosterServer) Post(context.Context, *PostRequest) (*PostReply, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method Post not implemented")
-}
-
-func RegisterPosterServer(s *grpc.Server, srv PosterServer) {
-	s.RegisterService(&_Poster_serviceDesc, srv)
-}
-
-func _Poster_Post_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(PostRequest)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(PosterServer).Post(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: "/Poster.v1.Poster/Post",
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(PosterServer).Post(ctx, req.(*PostRequest))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
-var _Poster_serviceDesc = grpc.ServiceDesc{
-	ServiceName: "Poster.v1.Poster",
-	HandlerType: (*PosterServer)(nil),
-	Methods: []grpc.MethodDesc{
-		{
-			MethodName: "Post",
-			Handler:    _Poster_Post_Handler,
-		},
-	},
-	Streams:  []grpc.StreamDesc{},
-	Metadata: "poster.proto",
 }
