@@ -3,7 +3,6 @@ module github.com/mfamador/benthos-input-grpc
 go 1.17
 
 require (
-	github.com/Azure/azure-sdk-for-go v59.1.0+incompatible
 	github.com/Jeffail/benthos/v3 v3.61.0
 	github.com/jinzhu/configor v1.2.1
 	github.com/rs/zerolog v1.26.1
@@ -15,6 +14,7 @@ require (
 	cloud.google.com/go v0.97.0 // indirect
 	cloud.google.com/go/pubsub v1.17.1 // indirect
 	github.com/Azure/azure-pipeline-go v0.2.3 // indirect
+	github.com/Azure/azure-sdk-for-go v59.1.0+incompatible // indirect
 	github.com/Azure/azure-storage-queue-go v0.0.0-20191125232315-636801874cdd // indirect
 	github.com/Azure/go-amqp v0.15.0 // indirect
 	github.com/Azure/go-autorest v14.2.0+incompatible // indirect
@@ -38,9 +38,7 @@ require (
 	github.com/bradfitz/gomemcache v0.0.0-20190913173617-a41fca850d0b // indirect
 	github.com/cenkalti/backoff/v4 v4.1.1 // indirect
 	github.com/census-instrumentation/opencensus-proto v0.3.0 // indirect
-	github.com/cespare/xxhash v1.1.0 // indirect
 	github.com/cespare/xxhash/v2 v2.1.2 // indirect
-	github.com/chris-ramon/douceur v0.2.0 // indirect
 	github.com/clbanning/mxj/v2 v2.5.5 // indirect
 	github.com/cloudflare/golz4 v0.0.0-20150217214814-ef862a3cdc58 // indirect
 	github.com/cncf/udpa/go v0.0.0-20210930031921-04548b0d99d4 // indirect
@@ -59,7 +57,6 @@ require (
 	github.com/envoyproxy/protoc-gen-validate v0.6.2 // indirect
 	github.com/fatih/color v1.13.0 // indirect
 	github.com/felixge/httpsnoop v1.0.2 // indirect
-	github.com/form3tech-oss/jwt-go v3.2.5+incompatible // indirect
 	github.com/fsnotify/fsnotify v1.5.1 // indirect
 	github.com/go-redis/redis/v7 v7.4.1 // indirect
 	github.com/go-sql-driver/mysql v1.6.0 // indirect
@@ -85,7 +82,6 @@ require (
 	github.com/hashicorp/go-uuid v1.0.2 // indirect
 	github.com/influxdata/go-syslog/v3 v3.0.0 // indirect
 	github.com/influxdata/influxdb1-client v0.0.0-20200827194710-b269163b24ab // indirect
-	github.com/itchyny/astgen-go v0.0.0-20200815150004-12a293722290 // indirect
 	github.com/itchyny/gojq v0.12.5 // indirect
 	github.com/itchyny/timefmt-go v0.1.3 // indirect
 	github.com/jcmturner/aescts/v2 v2.0.0 // indirect
@@ -133,13 +129,10 @@ require (
 	github.com/rickb777/plural v1.4.1 // indirect
 	github.com/robfig/cron/v3 v3.0.1 // indirect
 	github.com/russross/blackfriday/v2 v2.1.0 // indirect
-	github.com/satori/go.uuid v1.2.0 // indirect
 	github.com/segmentio/ksuid v1.0.4 // indirect
-	github.com/shurcooL/sanitized_anchor_name v1.0.0 // indirect
 	github.com/sirupsen/logrus v1.8.1 // indirect
 	github.com/smira/go-statsd v1.3.2 // indirect
 	github.com/spf13/cast v1.4.1 // indirect
-	github.com/streadway/amqp v1.0.0 // indirect
 	github.com/tilinna/z85 v1.0.0 // indirect
 	github.com/uber/jaeger-client-go v2.25.0+incompatible // indirect
 	github.com/uber/jaeger-lib v2.4.1+incompatible // indirect
