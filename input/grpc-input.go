@@ -11,28 +11,25 @@ import (
 )
 
 const (
-	field_max_in_flight   = "max_in_flight"
-	default_max_in_flight = 10
+	fieldMaxInFlight   = "max_in_flight"
+	defaultMaxInFlight = 10
 )
 
 var gRPCInputConfigSpec = service.NewConfigSpec().
 	Summary("Creates an input that receives msgs from a gRPC server.").
-	Field(service.NewIntField(field_max_in_flight).Default(default_max_in_flight))
+	Field(service.NewIntField(fieldMaxInFlight).Default(defaultMaxInFlight))
 
 func newGRPCInput(conf *service.ParsedConfig) (service.Input, error) {
-	mf, err := conf.FieldInt(field_max_in_flight)
+	mf, err := conf.FieldInt(fieldMaxInFlight)
 	if err != nil {
 		log.Panic().Msgf("could not get max in flight value: %v", err)
 	}
-	input := gRPCInput{
-		messageChan: make(chan *service.Message, mf),
-	}
+	input := gRPCInput{messageChan: make(chan *service.Message, mf)}
 	go func() {
 		if err := server.RunApp(config.Config.Server, input.messageChan); err != nil {
 			log.Panic().Msgf("failed to run app: %v", err)
 		}
 	}()
-
 	return service.AutoRetryNacks(&input), nil
 }
 
