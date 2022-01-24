@@ -15,6 +15,9 @@ pipeline:
       message: "message passing through benthos"
       fields:
         payload: '${! json() }'
+  - bloblang: |
+      throw("test error")
+
 
 output:
   switch:

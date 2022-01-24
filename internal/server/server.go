@@ -25,9 +25,9 @@ func Start(grpcServer *grpc.Server, list net.Listener) error {
 }
 
 // GetGRPCServer returns the gRPC server
-func GetGRPCServer(conf Config, messageChann chan *service.Message) (*grpc.Server, net.Listener, error) {
+func GetGRPCServer(conf Config, messageChan chan *service.Message, errorChan chan error) (*grpc.Server, net.Listener, error) {
 	grpcServer := grpc.NewServer()
-	posterv1.RegisterPosterServer(grpcServer, posterapi.NewPosterService(messageChann))
+	posterv1.RegisterPosterServer(grpcServer, posterapi.NewPosterService(messageChan, errorChan))
 	listener, err := net.Listen("tcp", fmt.Sprintf(":%d", conf.GrpcPort))
 	if err != nil {
 		return nil, nil, fmt.Errorf("error creating listener: %v", err)
@@ -36,8 +36,8 @@ func GetGRPCServer(conf Config, messageChann chan *service.Message) (*grpc.Serve
 }
 
 // RunApp runs the API
-func RunApp(sConf Config, messageChann chan *service.Message) error {
-	grpcServer, lis, err := GetGRPCServer(sConf, messageChann)
+func RunApp(sConf Config, messageChan chan *service.Message, errorChan chan error) error {
+	grpcServer, lis, err := GetGRPCServer(sConf, messageChan, errorChan)
 	if err != nil {
 		return fmt.Errorf("failed to build grpcServer: %v", err)
 	}

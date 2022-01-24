@@ -22,8 +22,8 @@ type posterService struct {
 }
 
 // NewPosterService instantiates a new poster service
-func NewPosterService(messageChan chan *benthosSvc.Message) PosterService {
-	benthosPoster := service.NewPoster(benthos.NewPoster(messageChan))
+func NewPosterService(messageChan chan *benthosSvc.Message, errorChan chan error) PosterService {
+	benthosPoster := service.NewPoster(benthos.NewPoster(messageChan, errorChan))
 	return &posterService{
 		serverService: benthosPoster,
 	}

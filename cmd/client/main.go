@@ -17,15 +17,17 @@ func main() {
 	log.Info().Timestamp().Msg("Client gRPC Poster API")
 	conn, err := grpc.Dial(fmt.Sprintf("localhost:%d", config.Config.Server.GrpcPort), grpc.WithInsecure())
 	if err != nil {
-		log.Error().Err(err)
+		log.Error().Timestamp().Msg(err.Error())
 	}
 	client := posterv1.NewPosterClient(conn)
 	for {
 		const size = 10
 		request := posterv1.PostRequest{Message: fmt.Sprintf(`{"foo":%q,"bar":%q}`, randSeq(size), randSeq(size))}
-		_, err := client.Post(context.Background(), &request)
+		reply, err := client.Post(context.Background(), &request)
 		if err != nil {
-			log.Error().Err(err)
+			log.Error().Timestamp().Msg(err.Error())
+		} else {
+			log.Info().Timestamp().Msgf("msg sent: %v", reply)
 		}
 		time.Sleep(time.Second)
 	}

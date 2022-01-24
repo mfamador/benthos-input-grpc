@@ -24,13 +24,16 @@ func newGRPCInput(conf *service.ParsedConfig) (service.Input, error) {
 	if err != nil {
 		log.Panic().Msgf("could not get max in flight value: %v", err)
 	}
-	input := gRPCInput{messageChan: make(chan *service.Message, mf)}
+	input := gRPCInput{
+		messageChan: make(chan *service.Message, mf),
+		errorChan:   make(chan error),
+	}
 	go func() {
-		if err := server.RunApp(config.Config.Server, input.messageChan); err != nil {
+		if err := server.RunApp(config.Config.Server, input.messageChan, input.errorChan); err != nil {
 			log.Panic().Msgf("failed to run app: %v", err)
 		}
 	}()
-	return service.AutoRetryNacks(&input), nil
+	return &input, nil
 }
 
 func init() {
@@ -48,6 +51,7 @@ func init() {
 
 type gRPCInput struct {
 	messageChan chan *service.Message
+	errorChan   chan error
 }
 
 func (rts *gRPCInput) Connect(ctx context.Context) error {
@@ -57,7 +61,8 @@ func (rts *gRPCInput) Connect(ctx context.Context) error {
 func (rts *gRPCInput) Read(ctx context.Context) (*service.Message, service.AckFunc, error) {
 	record := <-rts.messageChan
 	return record, func(ctx context.Context, err error) error {
-		return nil
+		rts.errorChan <- err
+		return err
 	}, nil
 }
 
