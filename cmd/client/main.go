@@ -4,6 +4,7 @@ package main
 import (
 	"context"
 	"fmt"
+	"google.golang.org/grpc/credentials/insecure"
 	"math/rand"
 	"time"
 
@@ -15,7 +16,7 @@ import (
 
 func main() {
 	log.Info().Timestamp().Msg("Client gRPC Poster API")
-	conn, err := grpc.Dial(fmt.Sprintf("localhost:%d", config.Config.Server.GrpcPort), grpc.WithInsecure())
+	conn, err := grpc.Dial(fmt.Sprintf("localhost:%d", config.Config.Server.GrpcPort), grpc.WithTransportCredentials(insecure.NewCredentials()))
 	if err != nil {
 		log.Error().Timestamp().Msg(err.Error())
 	}
