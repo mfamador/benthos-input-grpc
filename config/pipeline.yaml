@@ -1,5 +1,6 @@
 http:
-  address: ${HTTP_ADDRESS:0.0.0.0:4199}
+  address: ${HTTP_ADDRESS:0.0.0.0:4195}
+  enabled: ${HTTP_ENABLED:false}
 
 input:
   broker:
