@@ -29,13 +29,11 @@ output:
           stdout: {}
 
 metrics:
-  prometheus:
-    prefix: benthos
+  prometheus: {}
 
 logger:
-  prefix: benthos-grpc
-  level: ${LOGLEVEL:INFO}
-  add_timestamp: true
-  format: logfmt
+  level: ${LOGGER_LEVEL:DEBUG}
+  add_timestamp: ${LOGGER_ADD_TIMESTAMP:true}
+  format: ${LOGGER_FORMAT:logfmt}
   static_fields:
     '@service': benthos_grpc
