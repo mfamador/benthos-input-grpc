@@ -2,7 +2,7 @@
 package benthos
 
 import (
-	"github.com/Jeffail/benthos/v3/public/service"
+	"github.com/benthosdev/benthos/v4/public/service"
 	"github.com/mfamador/benthos-input-grpc/internal/repository"
 )
 

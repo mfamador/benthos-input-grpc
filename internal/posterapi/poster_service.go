@@ -7,7 +7,7 @@ import (
 
 	"github.com/mfamador/benthos-input-grpc/internal/datasource/benthos"
 
-	benthosSvc "github.com/Jeffail/benthos/v3/public/service"
+	benthosSvc "github.com/benthosdev/benthos/v4/public/service"
 	"github.com/mfamador/benthos-input-grpc/internal/service"
 	"github.com/mfamador/benthos-input-grpc/pkg/posterv1"
 )

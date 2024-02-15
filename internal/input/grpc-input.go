@@ -4,7 +4,7 @@ package input
 import (
 	"context"
 
-	"github.com/Jeffail/benthos/v3/public/service"
+	"github.com/benthosdev/benthos/v4/public/service"
 	"github.com/mfamador/benthos-input-grpc/internal/config"
 	"github.com/mfamador/benthos-input-grpc/internal/server"
 	"github.com/rs/zerolog/log"

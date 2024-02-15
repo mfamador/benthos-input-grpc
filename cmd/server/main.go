@@ -2,13 +2,16 @@
 package main
 
 import (
-	"github.com/Jeffail/benthos/v3/lib/service"
-	_ "github.com/mfamador/benthos-input-grpc/input"
+	"context"
+
+	_ "github.com/benthosdev/benthos/v4/public/components/all"
+	"github.com/benthosdev/benthos/v4/public/service"
+	_ "github.com/mfamador/benthos-input-grpc/internal/input"
 	"github.com/rs/zerolog/log"
 )
 
 func main() {
 	log.Info().Timestamp().Msg("Poster gRPC API Server")
 
-	service.Run()
+	service.RunCLI(context.Background())
 }
